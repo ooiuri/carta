@@ -16,6 +16,16 @@ function fase2(){
     translate(0,0)
     //rotate(i);
     //textSize(50*sin(i/2));
+
+    if(luz == true){
+        textFont(font); // TEXTO
+        textSize(15);
+        textAlign(LEFT);
+        fill(0);
+        noStroke();
+        text('pressione "n" para próxima página',50,(height)-50);
+        }
+
     fill(0,0,0);
     textSize(20);
     textAlign(CENTER, TOP);
@@ -29,6 +39,7 @@ function fase2(){
     tempus, ac auctor quam commodo. Morbi ut laoreet nibh, quis tincidunt ex. Cras laoreet magna sit amet nibh varius, sit amet 
     sollicitudin ex cursus. Praesent ut luctus ex, id scelerisque dolor. Integer ullamcorper molestie tincidunt. In volutpat ` 
     , width/2,20);
+    
     
 }
 

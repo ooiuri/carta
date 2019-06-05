@@ -2,15 +2,25 @@
 /*                                                      */
 /*                  A   C A R T A                       */
 /*                                                      */
-/*   De: Iuri                                           */
+/*   https://github.com/ooiuri/carta                    */
 /*                                                      */
 /*   O programa está escrito em p5.js                   */
 /*   Funciona com o intuito de ser uma carta eletronica */
 /*                                                      */
 /*                                                      */
+/*                                                      */
+/*                                                      */
+/*                                                      */
+/*                                                      */
+/*                                                      */
 /*   comando para iniciar o servidor node.js            */
 /*   browser-sync start --server -f -w                  */
 /*                                                      */
+/*                                                      */
+/*                                                      */
+/*                                                      */
+/*                                                      */
+/*                              espero que vcs gostem   */
 /*                                                      */
 //////////////////////////////////////////////////////////
 
@@ -25,13 +35,16 @@ var luzvalue = 0;
 
 //Fase 1 - Fundo
 var v=[];
-var l =200;
+var l = 200;
 var last_mouseX;
 
 //Fase 3
 var cora, b=1
 var kp=0.28
 var t=0;
+
+//Fase 4
+var firework; 
 
 //Carregar Fonte
 function preload() {
@@ -49,15 +62,17 @@ function setup() {
     }
     last_mouseX = mouseX;
     cora=new tracee();
+    initFirework();
+    colorMode(RGB);
 }
 
 function draw() {
   if (fase == 0) fase1();
   else if (fase == 1) fase2();
   else if (fase == 2) fase3();
+  else if (fase == 3) fase4();
 
 }
-
 
 function fase1(){ //PRIMEIRA FASE CARTA FUNDO BRANCO
     //background(38,0,64);
@@ -92,7 +107,7 @@ function fase1(){ //PRIMEIRA FASE CARTA FUNDO BRANCO
     textSize(height*0.026);
     noStroke();
     fill(0,h*3-90);
-    text('De: Iuri\nPara: Luísa',width/2,(height/2)-h);
+    text('De: \nPara: ',width/2,(height/2)-h);
 
     polygon(width/2,height/2); //FRENTE
     
@@ -101,10 +116,7 @@ function fase1(){ //PRIMEIRA FASE CARTA FUNDO BRANCO
     fill(255,h*3-100);
     text('pressione "d" para continuar',width/2,(height)*3/4);
 
-
-
 }
-
 
 
 function polygon(x,y){
@@ -172,19 +184,20 @@ function getmouse(last_mouseX){
 
 function keyPressed(){
     if(key == 'd' || key == 'D'){
-        fase = 1;
+        fase = 1; colorMode(RGB);
     }else if(key == 'a'){
-        fase = 0;
+        fase = 0; colorMode(RGB); 
     }else if(key == 'l' && fase == 1){
         luz = true;
     }else if(key == 'g'  && fase == 1){
         luz = false;
     }else if(key == 'c' ){
-        fase = 2;
+        fase = 2; colorMode(RGB); 
         clear();
         background(0);
     }else if(key == 'n'  ){
-        fase = 1;
+        fase = 3;
+        if(keyPressed()) initFirework();
     }
 
 }
