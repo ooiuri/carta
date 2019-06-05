@@ -29,7 +29,7 @@ var l =200;
 var last_mouseX;
 
 //Fase 3
-var a, b=1
+var cora, b=1
 var kp=0.28
 var t=0;
 
@@ -48,13 +48,13 @@ function setup() {
     v[i]= new pointy();
     }
     last_mouseX = mouseX;
-    a=new trace ();
+    cora=new tracee();
 }
 
 function draw() {
   if (fase == 0) fase1();
   else if (fase == 1) fase2();
-  else if (fase == 3) fase3();
+  else if (fase == 2) fase3();
 
 }
 
@@ -180,7 +180,9 @@ function keyPressed(){
     }else if(key == 'g'  && fase == 1){
         luz = false;
     }else if(key == 'c' ){
-        fase = 3;
+        fase = 2;
+        clear();
+        background(0);
     }else if(key == 'n'  ){
         fase = 1;
     }
