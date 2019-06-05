@@ -48,6 +48,7 @@ var firework;
 
 //Carregar Fonte
 function preload() {
+  song = loadSound('assets/500_miles.mp3');
   font = loadFont('MERCY.otf');
 }
 
@@ -196,6 +197,9 @@ function keyPressed(){
         clear();
         background(0);
     }else if(key == 'n'  ){
+        if (song.isPlaying()==false) {
+          song.play();
+        }
         fase = 3;
         if(keyPressed()) initFirework();
     }
