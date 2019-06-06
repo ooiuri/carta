@@ -20,7 +20,7 @@
 /*                                                      */
 /*                                                      */
 /*                                                      */
-/*                              espero que vcs gostem   */
+/*                               espero que vcs gostem  */
 /*                                                      */
 //////////////////////////////////////////////////////////
 
@@ -38,6 +38,8 @@ var v=[];
 var l = 200;
 var last_mouseX;
 
+//fase 2
+var pag = 1;
 //Fase 3
 var cora, b=1
 var kp=0.28
@@ -46,10 +48,13 @@ var t=0;
 //Fase 4
 var firework; 
 
+let song
 //Carregar Fonte
 function preload() {
+  
   song = loadSound('assets/500_miles.mp3');
   font = loadFont('MERCY.otf');
+  
 }
 
 function setup() {
@@ -65,6 +70,8 @@ function setup() {
     cora=new tracee();
     initFirework();
     colorMode(RGB);
+    song.stop();
+    
 }
 
 function draw() {
@@ -78,12 +85,7 @@ function draw() {
 function fase1(){ //PRIMEIRA FASE CARTA FUNDO BRANCO
     //background(38,0,64);
     background(5,0,36);
-    mouseVel = getmouse(last_mouseX);
-    for (i = 0 ; i<l; i++){
-        v[i].draw();
-        v[i].update(mouseVel);
-    }
-    last_mouseX = mouseX;
+    
 
     fill(255); //FUNDO DA CARTA
     //stroke(53,56,62);
@@ -91,6 +93,13 @@ function fase1(){ //PRIMEIRA FASE CARTA FUNDO BRANCO
     strokeWeight(10);
     rectMode(CENTER)
     rect(width/2,height/2,cartax,cartay)
+
+    mouseVel = getmouse(last_mouseX);
+    for (i = 0 ; i<l; i++){
+        v[i].draw();
+        v[i].update(mouseVel);
+    }
+    last_mouseX = mouseX;
 
     fill(252,254,163) //PAPEL
     noStroke();
@@ -108,7 +117,7 @@ function fase1(){ //PRIMEIRA FASE CARTA FUNDO BRANCO
     textSize(height*0.026);
     noStroke();
     fill(0,h*3-90);
-    text('De: \nPara: ',width/2,(height/2)-h);
+    text('De: ___ \nPara: ___',width/2,(height/2)-h);
 
     polygon(width/2,height/2); //FRENTE
     
@@ -148,17 +157,18 @@ function triangulo(x,y,h){
 //BACKGROUND FASE 1
 function pointy () {
 	this.pos=createVector(random(width),random(height),random(-100,100));
-    this.vel=createVector(0,-.5);
+  this.vel=createVector(0,-.5);
   this.vel.setMag(map(this.pos.z,-100,100,0,1));
-this.color=random(0,255);
+  this.color=random(0,255);
 	this.draw=function (){
     noStroke();
     fill(this.color);
     ellipse(this.pos.x,this.pos.y,map(this.pos.z,-100,100,1,10));
   }
   this.update=function(mouseVel){
-    zlocal = map(this.pos.z, -100,100,-2,2);
-  	this.vel.add(mouseVel);
+    zlocal = map(this.pos.z, -100,100,0,1);
+    this.vel.add(mouseVel);
+    this.vel.x *= zlocal;
     //this.vel.x=map(this.pos.z,-100,100,-1,1);
     this.pos.add(this.vel);
     if (this.pos.y>height || this.pos.y<0){
@@ -169,7 +179,7 @@ this.color=random(0,255);
     
     if (this.vel.x < -1) this.vel.x = -1;
     if (this.vel.x >  1) this.vel.x =  1;
-    this.vel.x*=0.99;
+    this.vel.x*=.99;
     
   }
   
@@ -190,18 +200,24 @@ function keyPressed(){
         fase = 0; colorMode(RGB); 
     }else if(key == 'l' && fase == 1){
         luz = true;
-    }else if(key == 'g'  && fase == 1){
+    }else if(key == 'k'  && fase == 1){
         luz = false;
     }else if(key == 'c' ){
+      
         fase = 2; colorMode(RGB); 
         clear();
         background(0);
     }else if(key == 'n'  ){
+        fase = 3;
         if (song.isPlaying()==false) {
           song.play();
         }
-        fase = 3;
         if(keyPressed()) initFirework();
+    }
+    else if (key == 'g'){ 
+      pag = 1;
+    }else if (key == 'h'){ 
+      pag = 2;
     }
 
 }

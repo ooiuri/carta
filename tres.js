@@ -9,7 +9,7 @@ function fase3(){
     textSize(20);
     fill(180);
     noStroke();
-    text('feito com amor em 05/06/2019',width/2,(height)-50);
+    text('feito em 05/06/2019',width/2,(height)-50);
     translate(width/2,height/2);
     x=16*sin(t)*sin(t)*sin(t);
     y=13*cos(t)-5*cos(2*t)-2*cos(3*t)-cos(4*t);
@@ -19,8 +19,8 @@ function fase3(){
 	background(0,0,0,3);
   cora.draww();
   cora.updatee(x,y);
-  noStroke();
-  //point(x,y);
+  
+  point(x,y);
   t+=0.02;
   
  
